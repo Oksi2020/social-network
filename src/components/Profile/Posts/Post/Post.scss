@@ -1,0 +1,13 @@
+.post__item {
+    // display: flex;
+    padding: 2%;
+    background-color: aquamarine;
+    &>.post__title {
+        display: block;
+    }
+}
+.post__picture {
+    max-width: 10%;
+    height: auto;
+    margin-right: 10px;
+}

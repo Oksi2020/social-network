@@ -1,0 +1,17 @@
+export const ADD_POST = 'ADD_POST';
+export const SET_PROFILE = 'SET_PROFILE';
+export const GET_STATUS = 'GET_STATUS';
+export const SET_STATUS = 'SET_STATUS';
+
+export const ADD_MESSAGE = 'ADD_MESSAGE';
+
+export const CHANGE_FOLLOWING = 'CHANGE_FOLLOWING';
+export const SET_USERS = 'SET_USERS';
+export const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
+export const SET_ACTIVE_PAGE = 'SET_ACTIVE_PAGE';
+export const TOGGLE_LOADER = 'TOGGLE_LOADER';
+export const TOGGLE_FOLLOWING = 'TOGGLE_FOLLOWING';
+
+export const SET_USER_INFO = 'SET_USER_INFO';
+
+export const SET_INITIALIZED = 'SET_INITIALIZED';

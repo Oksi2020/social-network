@@ -1,0 +1,15 @@
+.dialogs_item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    & a{
+        text-decoration: none;
+        color: black;
+    }
+    .dialog__avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50px;
+        margin-right: 10px;
+    }
+}

@@ -1,0 +1,30 @@
+.user {
+    display: flex;
+    border: 1px solid black;
+    margin: 5px;
+    border-radius: 10px;
+    padding: 5px;
+    .main-info  {
+        display: flex;
+        flex-direction: column;
+        img {
+            width: 100px;
+            height: auto;
+            margin: 10px;
+        }
+    }
+    .description {
+        
+    }
+}
+.loading {
+    width: 300px;
+}
+.pages {
+    .page-number {
+        margin: 3px;
+    }
+    .page-number.selected-page {
+        font-weight: bold;
+    }
+}
