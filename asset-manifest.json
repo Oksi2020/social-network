@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/social-network/static/css/main.591e7187.chunk.css",
+    "main.js": "/social-network/static/js/main.4c58bcf6.chunk.js",
+    "main.js.map": "/social-network/static/js/main.4c58bcf6.chunk.js.map",
+    "runtime-main.js": "/social-network/static/js/runtime-main.57065a28.js",
+    "runtime-main.js.map": "/social-network/static/js/runtime-main.57065a28.js.map",
+    "static/js/2.c5387d72.chunk.js": "/social-network/static/js/2.c5387d72.chunk.js",
+    "static/js/2.c5387d72.chunk.js.map": "/social-network/static/js/2.c5387d72.chunk.js.map",
+    "index.html": "/social-network/index.html",
+    "static/css/main.591e7187.chunk.css.map": "/social-network/static/css/main.591e7187.chunk.css.map",
+    "static/js/2.c5387d72.chunk.js.LICENSE.txt": "/social-network/static/js/2.c5387d72.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/social-network/static/media/ConcertOne-Regular.a116a857.ttf",
+    "static/media/catAvatar.12fd2b01.png": "/social-network/static/media/catAvatar.12fd2b01.png",
+    "static/media/catLoader.31f79637.gif": "/social-network/static/media/catLoader.31f79637.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.57065a28.js",
+    "static/js/2.c5387d72.chunk.js",
+    "static/css/main.591e7187.chunk.css",
+    "static/js/main.4c58bcf6.chunk.js"
+  ]
+}
