@@ -1,0 +1,18 @@
+$color: #5C2610;
+
+.news {
+    .seeking-input {
+        text-decoration: none;
+        display: inline-block;
+        padding: 10px 16px;
+        margin: 10px 6px;
+        font-size: 12px;
+        border-radius: 10px;
+        border: 2px solid $color;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: $color;
+        transition: .15s ease-in-out;
+    }
+}

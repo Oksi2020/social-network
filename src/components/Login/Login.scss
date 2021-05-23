@@ -1,4 +1,48 @@
-.error-border {
-    border: 1px solid red;
-    padding: 5px;
+$color: #5C2610;
+
+.login {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    input, button {
+        text-decoration: none;
+        width: 300px;
+        display: inline-block;
+        padding: 8px 14px;
+        margin: 8px 4px;
+        font-size: 12px;
+        border-radius: 10px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        letter-spacing: 2px;
+        transition: .15s ease-in-out;
+    }
+
+    button {
+        width: 330px;
+        color: white;
+        box-shadow: 0 0 40px 40px $color inset, 0 0 0 0 $color;
+        &:hover {
+            box-shadow: 0 0 10px 0 $color inset, 0 0 10px 4px $color;
+            color: $color;
+        }
+    }
+    .login-logo {
+        color: $color;
+        font-size: 90px;
+        font-style: italic;
+    }
+    .error-border {
+        border: 1px solid red;
+        padding: 5px;
+    
+    }
+    form {
+        text-align: center;
+        .remember-me, .or, .redirect-to-registration {
+            color: $color;
+            font-size: 20px;
+        }
+    }
 }

@@ -1,7 +1,16 @@
+export const SET_USERS_DATA = 'SET_USERS_DATA';
+export const SET_AUTH_DATA = 'SET_AUTH_DATA';
+export const SET_PROFILE_DATA = 'SET_PROFILE_DATA';
+export const SET_DIALOGS_DATA = 'SET_DIALOGS_DATA';
+export const SET_AUTH_PHOTO = 'SET_AUTH_PHOTO';
+export const CHANGE_AUTH_DEFAULT_PHOTO = 'CHANGE_AUTH_DEFAULT_PHOTO';
+
 export const ADD_POST = 'ADD_POST';
+export const DELETE_POST = 'DELETE_POST';
 export const SET_PROFILE = 'SET_PROFILE';
 export const GET_STATUS = 'GET_STATUS';
 export const SET_STATUS = 'SET_STATUS';
+export const SET_AVATAR_PHOTO = 'SET_AVATAR_PHOTO';
 
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 
@@ -11,7 +20,19 @@ export const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
 export const SET_ACTIVE_PAGE = 'SET_ACTIVE_PAGE';
 export const TOGGLE_LOADER = 'TOGGLE_LOADER';
 export const TOGGLE_FOLLOWING = 'TOGGLE_FOLLOWING';
+export const ADD_USER = 'ADD_USER';
+export const SET_USER_PHOTO = 'SET_USER_PHOTO';
+export const CHANGE_USER_DATA = 'CHANGE_USER_DATA';
+export const CHANGE_DEFAULT_PHOTO = 'CHANGE_DEFAULT_PHOTO';
+export const ADD_DIALOG = 'ADD_DIALOG';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const CHANGE_USERS = 'CHANGE_USERS';
 
 export const SET_USER_INFO = 'SET_USER_INFO';
 
 export const SET_INITIALIZED = 'SET_INITIALIZED';
+
+export const SET_NEWS_DATA = 'SET_NEWS_DATA';
+export const ADD_POST_TO_NEWS = 'ADD_POST_TO_NEWS';
+export const DELETE_POST_FROM_NEWS = 'DELETE_POST_FROM_NEWS';

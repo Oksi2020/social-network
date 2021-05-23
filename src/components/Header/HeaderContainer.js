@@ -15,7 +15,8 @@ class HeaderContainer extends Component {
 let mapStateToProps = (state) => {
     return{
         isAuth: state.authReducer.isAuth,
-        email: state.authReducer.email
+        user: state.authReducer.user,
+        url: state.appReducer.url
     }
 }
 

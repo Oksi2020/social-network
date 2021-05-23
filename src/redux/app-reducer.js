@@ -2,7 +2,8 @@ import { SET_INITIALIZED } from '../constants/index';
 import { setUserInfoThunk } from './auth-reducer';
 
 let initialState = {
-    initialized: false
+    initialized: false,
+    url: ''
 }
 
 let appReducer = (state=initialState, action) => {
@@ -20,13 +21,7 @@ let appReducer = (state=initialState, action) => {
 export const initializedSuccess = () => ({type: SET_INITIALIZED});
 
 export const initializeAppThunk = () => (dispatch) => {
-    let promise = dispatch(setUserInfoThunk());
-    console.log('promise', promise)
-    Promise.all([promise]).then(() => {
-        dispatch(initializedSuccess());
-    })
+    dispatch(initializedSuccess());
 }
-
-
 
 export default appReducer;

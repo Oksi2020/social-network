@@ -1,35 +1,43 @@
 import React from 'react';
-import Profile from '../Profile';
-import ProfileStatus from './ProfileStatus';
+import {encodeBase64, decodeBase64} from '../../../utils/base64';
 import Loader from '../../common/Loader';
-
 
 import classes from './ProfileInfo.module.scss';
 
-let background = 'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg';
-
-const Wallpaper = () => {
-    return (
-        <div className='profile__wallpaper' 
-            style={{ backgroundImage: `url(${background})` }}
-        >
-        </div>
-    )
-}
-
-const ProfileInfo = (props) => {
-    {
-        if(!props.profile) {
+const ProfileInfo = ({profile, isAuth, myProfile, isOwn, users, changeFollowThunk}) => {
+    let followingUsers = [];
+    if(isAuth) {
+        followingUsers = users.find(filteredUser=>filteredUser.id===myProfile.id).following
+    }
+    if(!profile) {
         return <Loader />
-    }}
+    }
     return (
         <div className={classes.profile_info}>
-            <Wallpaper />
             <div className={classes.main_info}>
-                <img src={props.profile.photos.large} />
-                ava + description
+                <div className={classes.main_info__photo}>
+                    { profile.photo 
+                        ? <img src={decodeBase64(profile.photo)}></img>
+                        : <img src={profile.defaultPhoto} />
+                    }
+                </div>   
+                <div className={classes.info}>
+                    <div className={classes.info_blocks}>
+                        <span><b>Ім'я користувача</b> {profile.userName}</span>
+                        <span><b>Опис:</b> {profile.status}</span>
+                    </div>
+                    <div className={classes.info_blocks}>
+                        <span><b>Країна:</b> {profile.location.country}</span>
+                        <span><b>Місто:</b> {profile.location.city}</span>
+                    </div>
+                </div>
+                <div className={classes.user_actions}>
+                { isOwn || isAuth && <button onClick={()=>{
+                    changeFollowThunk( profile.id, myProfile.id, users );
+                    }}>{ followingUsers.indexOf(profile.id)>=0?'Відписатись':'Підписатись'}
+                </button>
+                }</div>
             </div>
-            <ProfileStatus status={props.status} setUserStatus={props.setUserStatus}/>
         </div>
     )
 }

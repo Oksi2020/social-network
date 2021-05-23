@@ -16,6 +16,10 @@
     .description {
         
     }
+    .user_actions {
+        display: flex;
+        flex-direction: column;
+    }
 }
 .loading {
     width: 300px;

@@ -1,5 +1,4 @@
-import { ADD_POST, SET_PROFILE, GET_STATUS, SET_STATUS } from '../constants/index';
-import { profileApi } from '../api/api';
+import { ADD_POST, SET_PROFILE, GET_STATUS, SET_STATUS, SET_PROFILE_DATA } from '../constants/index';
 
 let initialState = {
     posts: [
@@ -13,18 +12,10 @@ let initialState = {
 
 const profilePageReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST: {
+        case SET_PROFILE_DATA:
             return {
-                ...state,
-                posts: [...state.posts, {
-                    id: 5,
-                    title: 'Your added post',
-                    description: action.post,
-                    image: 'https://handletheheat.com/wp-content/uploads/2015/03/Best-Birthday-Cake-with-milk-chocolate-buttercream-SQUARE.jpg'
-                }]
-            };
-        }
-
+                ...action.profileData
+            }
         case SET_PROFILE: {
             return { ...state, profile: action.profile }
         }
@@ -39,9 +30,8 @@ const profilePageReducer = (state = initialState, action) => {
     }
 }
 
-export const addPostAction = (post) => {
-    return ({ type: ADD_POST, post })
-}
+const setProfilesData = (profileData) => ({type: SET_PROFILE_DATA, profileData})
+
 
 export const setProfile = (profile) => {
     return ({ type: SET_PROFILE, profile });
@@ -51,19 +41,15 @@ export const setStatus = (status) => {
     return ({ type: SET_STATUS, status });
 }
 
-export const setUserProfile = (userId) => async dispatch => {
-    let response = await profileApi.setUserProfile(userId)
-    dispatch(setProfile(response.data));
+export const setProfileDataThunk = profileData => dispatch => {
+    dispatch(setProfilesData(profileData));
 }
 
-export const getUserStatus = userId => async dispatch => {
-    let response = await profileApi.getStatus(userId)
-    dispatch(setStatus(response.data));
-}
-export const setUserStatus = status => async dispatch => {
-    let response = await profileApi.setStatus(status)
-    if (response.data.resultCode === 0) {
-        dispatch(setStatus(status));
+export const setUserProfile = (userId, users) => dispatch => {
+    let userProfile = users.find(user=>user.id==userId);
+    if(userProfile) {
+        dispatch(setProfile(userProfile))
     }
 }
+
 export default profilePageReducer;

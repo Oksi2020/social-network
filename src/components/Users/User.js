@@ -1,22 +1,36 @@
-import catAvatar from '../../assets/img/catAvatar.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
+import {decodeBase64} from '../../utils/base64';
 
-const User = ({user, followingProgress, changeFollowThunk}) => {
+const User = ({ user, changeFollowThunk, addDialogThunk, users, activeUserId, followingUsers }) => {
+    const history = useHistory();
     return(
         <div className='user' key={user.id}>
             <div className='main-info'>
                 <NavLink to={`/profile/${user.id}`}>
-                    <img src={ user.photos.small==null?catAvatar:user.photos.small} />
+                    {
+                        user.photo
+                        ? <img src={ decodeBase64(user.photo) } />
+                        : <img src={ user.defaultPhoto} />
+                    }
                 </NavLink>
-                <button disabled={followingProgress.some(id=>id==user.id)} onClick={()=>{
-                    changeFollowThunk( user );
-                    }}>{user.followed? 'Unfollow':'Follow'}</button>
+                { activeUserId && <div className='user_actions'>
+                    <button onClick={()=>{ changeFollowThunk( user.id, activeUserId.id, users );}}>
+                        {followingUsers.indexOf(user.id)>=0?'Unfollow':'Follow'}
+                    </button>
+                    <button onClick={()=>{ 
+                        addDialogThunk(user.id, activeUserId.id, users); 
+                        history.push(`/messages/${user.id}`)
+                        }}>
+                        Write message
+                    </button>
+                    </div>
+                }
             </div>
             <div className='description'>
-                <h3 className='user-name'>{user.name}</h3>
+                <h3 className='user-name'>{user.userName}</h3>
                 <p className='user-status'>{user.status}</p>
-                <p className='user-country'><b>Country:</b> {"user.location.country"}</p>
-                <p className='user-country'><b>City:</b> {"user.location.city"}</p>
+                <p className='user-country'><b>Country:</b> {user.location.country}</p>
+                <p className='user-country'><b>City:</b> {user.location.city}</p>
             </div>
         </div>
     )

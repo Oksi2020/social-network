@@ -1,4 +1,4 @@
-import { ADD_MESSAGE,UPDATE_MESSAGE_VALUE} from '../constants/index';
+import { ADD_MESSAGE, UPDATE_MESSAGE_VALUE, SET_DIALOGS_DATA} from '../constants/index';
 
 let initialState = {
     dialogs: [
@@ -17,6 +17,10 @@ let initialState = {
 
 const dialogsPageReducer = ( state=initialState, action ) => {
     switch(action.type) {
+        case SET_DIALOGS_DATA: 
+            return {
+                ...action.dialogsData
+            }
         case ADD_MESSAGE: {
             return {
                 ...state,
@@ -35,6 +39,11 @@ const dialogsPageReducer = ( state=initialState, action ) => {
 
 export default dialogsPageReducer;
 
+const setDialogsData = (dialogsData) => ({type: SET_DIALOGS_DATA, dialogsData}); 
+
+export const setDialogsDataThunk = (dialogs) => dispatch => {
+    dispatch(setDialogsData(dialogs));
+}
 export const addMessageAction = (message) => {
     return({type: ADD_MESSAGE, message})
 }

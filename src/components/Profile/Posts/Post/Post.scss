@@ -1,13 +1,96 @@
+$color: #5C2610;
+
 .post__item {
-    // display: flex;
-    padding: 2%;
-    background-color: aquamarine;
-    &>.post__title {
+    border: 2px solid $color;
+    padding: 0 2%;
+    border-radius: 10px;
+    margin: 10px;
+    position: relative;
+    background-color: #fbb034;
+    background-image: linear-gradient(315deg, #fbb034 0%, #ebcc08 74%);
+    width: 87%;
+    padding-bottom: 10px;
+    &>.post__title, a {
         display: block;
+        font-size: 23px;
+        font-style: italic;
+        margin-top: 10px;
+        color: $color;
+        text-decoration: none;
+    }
+    .post__date {
+        position: absolute;
+        right: 40px;
+        top: 10px;
+        font-style: italic;
+    }
+    .delete-post {
+        position: absolute;
+        background-color: transparent;
+        font-size: 17px;
+        border: 0px solid;
+        right: 10px;
+        top: 10px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .post-comments__container {
+        padding: 0 15px;
+        margin-top: 10px;
+        .comment-form {
+            input, button {
+                text-decoration: none;
+                width: 300px;
+                display: inline-block;
+                padding: 8px 14px;
+                margin: 8px 4px;
+                font-size: 12px;
+                border-radius: 10px;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: bold;
+                letter-spacing: 2px;
+                transition: .15s ease-in-out;
+                &.add-comment__input {
+                    color: $color;
+                    width: 70%;
+                }
+                &.add-comment__button {
+                    width: 20%;
+                    color: white;
+                    box-shadow: 0 0 40px 40px $color inset, 0 0 0 0 $color;
+                    &:hover {
+                        box-shadow: 0 0 10px 0 $color inset, 0 0 10px 4px $color;
+                        color: $color;
+                    }
+                }
+            }
+        }
+        
+        .post-comments__comment {
+            display: flex;
+            margin-bottom: 10px;
+            .comment-user__logo {
+                margin-right: 10px;
+                a {
+                    margin-top: 0;
+                    img {
+                        width: 40px;
+                        border-radius: 50px;
+                    }
+                }
+                
+            }
+            .comment-user__name {
+                font-weight: bold;
+                font-style: italic;
+            }
+        }
     }
 }
 .post__picture {
-    max-width: 10%;
-    height: auto;
-    margin-right: 10px;
+    width: 200px;
+    margin: 5px;
+    height: 200px;
+    object-fit: cover;
 }

@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import './Users.scss';
+import {compose} from 'redux';
 import { connect } from 'react-redux';
 import Users from './Users';
-import { changeFollow, setUsers, setUsersTotalCount, setActivePage, toggleLoader, toggleFollowing, getUsersThunk, setActivePageThunk, changeFollowThunk } from '../../redux/users-reducer';
-import { getFollowingProgress, getIsLoading, getTotalUsersCount, getUserPage, getUsers, getUsersCount } from '../../redux/user-sellectors';
+import { changeFollowThunk, setUsers, setUsersTotalCount, setActivePage, toggleLoader, toggleFollowing, addDialogThunk } from '../../redux/users-reducer';
+import { getIsLoading, getTotalUsersCount, getUserPage, getUsers, getUsersCount } from '../../redux/user-sellectors';
+import withAuthRedirect from '../../hoc/withRedirect';
+
+import './Users.scss';
 
 class UsersContainer extends Component {
-
-    componentDidMount() {
-        this.props.getUsersThunk();
-    }
-
+    
     onClickSetActivePage = ( page ) => {
         this.props.setActivePageThunk(page, this.props.usersCount);
     }
@@ -18,15 +17,16 @@ class UsersContainer extends Component {
     render () {
         return <Users 
             users={this.props.users}
+            onlyFriends={this.props.onlyFriends}
             userPage = {this.props.userPage}
-            changeFollow={this.props.changeFollow}
+            changeFollowThunk={this.props.changeFollowThunk}
+            addDialogThunk={this.props.addDialogThunk}
             totalUsersCount={this.props.totalUsersCount}
             usersCount={this.props.usersCount}
             isLoading={this.props.isLoading}
-            followingProgress={this.props.followingProgress}
+            isAuth={this.props.isAuth}
+            activeUser={this.props.activeUser}
             toggleFollowing={this.props.toggleFollowing}
-            onClickSetActivePage = {this.onClickSetActivePage}
-            changeFollowThunk = {this.props.changeFollowThunk}
         />
     }
 }
@@ -39,8 +39,11 @@ const mapStateToProps = (state) => {
         totalUsersCount: getTotalUsersCount(state),
         userPage: getUserPage(state),
         isLoading: getIsLoading(state),
-        followingProgress: getFollowingProgress(state)
+        isAuth: state.authReducer.isAuth,
+        activeUser: state.authReducer.user,
     }
 } 
 
-export default connect( mapStateToProps, { changeFollow, setUsers, setUsersTotalCount, setActivePage, toggleLoader, toggleFollowing, getUsersThunk, setActivePageThunk, changeFollowThunk })(UsersContainer);
+export default compose(connect( mapStateToProps, { changeFollowThunk, setUsers, setUsersTotalCount, setActivePage, toggleLoader, toggleFollowing, addDialogThunk }),
+    // withAuthRedirect
+    )(UsersContainer);

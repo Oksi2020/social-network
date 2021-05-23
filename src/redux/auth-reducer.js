@@ -1,50 +1,73 @@
-import { SET_USER_INFO } from '../constants/index';
+import { SET_USER_INFO, SET_AUTH_DATA, SET_AUTH_PHOTO, CHANGE_AUTH_DEFAULT_PHOTO } from '../constants/index';
 import { loginIp } from '../api/api';
 import { stopSubmit } from 'redux-form';
 
 let initialState = {
-    userId: null,
-    email: null,
-    password: null,
+    user: null,
     isAuth: false
 }
 
 let authReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_AUTH_DATA: 
+            return {
+                ...action.authData
+            }
         case SET_USER_INFO:
             return {
                 ...state,
                 ...action.payload
+            }
+        case SET_AUTH_PHOTO: 
+            return {
+                ...state,
+                ...action.photo
+            }
+        case CHANGE_AUTH_DEFAULT_PHOTO:
+            return {
+                ...state, 
+                user: {
+                    ...state.user,
+                    defaultPhoto: action.defaultPhoto
+                }
             }
         default:
             return state;
     }
 }
 
-export const setUserInfo = (userId, email, password, isAuth) => ({ type: SET_USER_INFO, payload: { userId, email, password, isAuth } });
+export const setUserInfo = (user, isAuth) => ({ type: SET_USER_INFO, payload: { user, isAuth } });
+export const setAuthData = (authData) => ({type: SET_AUTH_DATA, authData});
+export const changeAuthPhoto = photo => ({type: SET_AUTH_PHOTO, photo});
+export const changeAuthDefaultPhoto = defaultPhoto => ({type: CHANGE_AUTH_DEFAULT_PHOTO, defaultPhoto});
 
-export const setUserInfoThunk = () => async dispatch => {
-    let response = await loginIp.setUserInfo()
-    if (response.data.resultCode === 0) {
-        dispatch(setUserInfo(response.data.data.id, response.data.data.email, response.data.data.password, true));
+export const login = (email, password, rememberMe, users) => dispatch => {
+    let activeUser = users.find(user=>user.email===email&&user.password===password);
+    if(activeUser) {
+        dispatch(setUserInfo(activeUser, true))
+    }
+    if(rememberMe) {
+        localStorage.setItem('authReducer', JSON.stringify({user:activeUser, isAuth: true}));
     }
 }
 
-export const login = (email, password, rememberMe) => async dispatch => {
-    let response = await loginIp.login(email, password, rememberMe,)
-    if (response.data.resultCode === 0) {
-        dispatch(setUserInfo(response.data.data.userId, email, password, true))
-    } else {
-        let errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
-        dispatch(stopSubmit('login', { _error: errorMessage }));
-    }
+export const setAuthDataThunk = (authData) => dispatch => {
+    dispatch(setAuthData(authData));
 }
 
-export const logout = () => async dispatch => {
-    let response = await loginIp.logout()
-    if (response.data.resultCode === 0) {
-        dispatch(setUserInfo(null, null, null, false));
-    }
+export const logout = () => dispatch => {
+    dispatch(setUserInfo(null, null, null, false));
+    localStorage.removeItem('authReducer');
+}
+
+export const register = (user) => dispatch => {
+    dispatch(setUserInfo(user, true))
+}
+
+export const changeAuthPhotoThunk = (photo, profileInfo) => dispatch => {
+    const newUser = profileInfo;
+    newUser.photo = photo;
+    dispatch(changeAuthPhoto(newUser));
 }
 
 export default authReducer;

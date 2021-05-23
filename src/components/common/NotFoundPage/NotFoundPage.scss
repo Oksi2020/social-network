@@ -1,0 +1,10 @@
+.not-found__page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .not-found__gif {
+        width: 80%;
+        height: auto;
+    }
+}
