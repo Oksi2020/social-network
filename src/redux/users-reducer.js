@@ -141,7 +141,6 @@ export const setUserPhotoThunk = (userPhoto, userId, users) => dispatch => {
 export const changeFollowThunk = (followingUserId, userId, users) => dispatch => {
     let newUsers = users.map(user=>{
         if(user.id==userId) {
-            console.log('found', userId)
             user.following.find(followed=>followed==followingUserId)
             ?user.following=user.following.filter(followed=>followed!=followingUserId)
             :user.following.push(followingUserId)
@@ -198,13 +197,14 @@ export const deletePostThunk = (postId, userId, users) => dispatch => {
 export const addDialogThunk = ( userId, activeUserId, users ) => dispatch => {
     let newUsers = users.map(user=>{
         if(user.id==userId) {
-            user.messages.push({userId: activeUserId, messages: []})
+            // user.messages.push({userId: activeUserId, messages: []})
+            user.messages = []
         }
-        if(user.id==activeUserId) user.messages.push({userId: userId, messages: []})
+        if(user.id==activeUserId) user.messages = []
         return user;
     });
     console.log('newUsers', newUsers)
-    dispatch(changeUsers(newUsers));
+    // dispatch(changeUsers(newUsers));
 }
 
 export const addCommentThunk = (postId, activeUserId, users, comment) => dispatch => {
@@ -215,9 +215,9 @@ export const addCommentThunk = (postId, activeUserId, users, comment) => dispatc
             }
             return post;
         })
+        
         return user
     })
-    console.log(newUsers)
     dispatch(changeUsers(newUsers));
 }
 

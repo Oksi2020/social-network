@@ -15,13 +15,13 @@ const User = ({ user, changeFollowThunk, addDialogThunk, users, activeUserId, fo
                 </NavLink>
                 { activeUserId && <div className='user_actions'>
                     <button onClick={()=>{ changeFollowThunk( user.id, activeUserId.id, users );}}>
-                        {followingUsers.indexOf(user.id)>=0?'Unfollow':'Follow'}
+                        {followingUsers.indexOf(user.id)>=0?'Підписатись':'Відписатись'}
                     </button>
                     <button onClick={()=>{ 
                         addDialogThunk(user.id, activeUserId.id, users); 
                         history.push(`/messages/${user.id}`)
                         }}>
-                        Write message
+                        Написати повідомлення
                     </button>
                     </div>
                 }
@@ -29,8 +29,8 @@ const User = ({ user, changeFollowThunk, addDialogThunk, users, activeUserId, fo
             <div className='description'>
                 <h3 className='user-name'>{user.userName}</h3>
                 <p className='user-status'>{user.status}</p>
-                <p className='user-country'><b>Country:</b> {user.location.country}</p>
-                <p className='user-country'><b>City:</b> {user.location.city}</p>
+                <p className='user-country'><b>Країна:</b> {user.location.country}</p>
+                <p className='user-country'><b>Місто:</b> {user.location.city}</p>
             </div>
         </div>
     )

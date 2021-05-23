@@ -27,9 +27,9 @@ import withSuspense from './hoc/withSuspence';
 class App extends Component {
   componentDidMount() {
     this.props.initializeAppThunk();
-    this.props.setUsersDataThunk(JSON.parse(localStorage.getItem("usersReducer")));
-    this.props.setDialogsDataThunk(JSON.parse(localStorage.getItem("dialogsPageReducer")));
-    this.props.setProfileDataThunk(JSON.parse(localStorage.getItem("profilePageReducer")));
+    if(JSON.parse(localStorage.getItem("usersReducer"))) this.props.setUsersDataThunk(JSON.parse(localStorage.getItem("usersReducer")));
+    if(JSON.parse(localStorage.getItem("dialogsPageReducer"))) this.props.setDialogsDataThunk(JSON.parse(localStorage.getItem("dialogsPageReducer")));
+    if(JSON.parse(localStorage.getItem("profilePageReducer"))) this.props.setProfileDataThunk(JSON.parse(localStorage.getItem("profilePageReducer")));
     let isActive = JSON.parse(localStorage.getItem('authReducer'));
     if(isActive) {
       this.props.setAuthDataThunk(isActive);
